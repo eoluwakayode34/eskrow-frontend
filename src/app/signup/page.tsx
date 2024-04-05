@@ -4,15 +4,15 @@ import WelcomeButton from "@/components/ui/button/welcomeButton";
 
 export default function Login() {
   return (
-    <AuthScreen>
+    <AuthScreen bg="/signup.png">
       <div className="gap-3 flex-col flex">
-        <h1>Make safer payments</h1>
-        <p>Select your Eskrow account type and pay securely 👌</p>
+        <h1>Welcome account</h1>
+        <p>Sign into your Eskrow account to continue 👌</p>
       </div>
 
       <div className="flex flex-col gap-12 mt-10">
-        <WelcomeButton>User login</WelcomeButton>
-        <WelcomeButton>Merchant login</WelcomeButton>
+        <WelcomeButton>User sign up</WelcomeButton>
+        <WelcomeButton>Merchant sign up</WelcomeButton>
       </div>
     </AuthScreen>
   );
