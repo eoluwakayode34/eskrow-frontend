@@ -68,7 +68,7 @@ const verifiedNavLinks: NavLink[] = [
   {
     name: "Purchases",
     icon: "purchases",
-    url: "/dashboard/get-started",
+    url: "/dashboard/merchant/purchases",
     roles: ["merchant"],
    
   },
@@ -82,7 +82,7 @@ const verifiedNavLinks: NavLink[] = [
   {
     name: "Disputes",
     icon: "disputes",
-    url: "/dashboard/get-started",
+    url: "/dashboard/merchant/disputes",
     roles: ["merchant"],
    
   },

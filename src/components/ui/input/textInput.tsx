@@ -97,10 +97,9 @@ function DefaultInput({
           <div className="absolute -bottom-[3px] left-3">{leftElement}</div>
         )}
 
-        <Field
+        <input
           id={id}
           name={name}
-          label={label}
           placeholder={placeholder}
           className={cn(
             `py-[14px]  font-medium px-[18px] text-primary placeholder:text-primary-300 text-sm w-full outline-0 border-[1px] border-[#8a95bfc0] rounded-[4px] focus:border-brand 
