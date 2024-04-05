@@ -1,6 +1,6 @@
 "use client";
-import PaymentCard from "@/components/card/paymentCard";
 import { Button } from "@/components/ui/button/button";
+import { payoutLinkListData } from "@/utils/data/payoutLinkListData";
 import { purchaseListData } from "@/utils/data/purchaseListData";
 import Image from "next/image";
 import React from "react";
@@ -8,46 +8,46 @@ import { GoArrowRight } from "react-icons/go";
 import { PiCopySimpleDuotone } from "react-icons/pi";
 import { twMerge } from "tailwind-merge";
 
-type TransactionStatusProps = {
-  type: "successful" | "pending" | "canceled";
+type PayoutLinkStatusProps = {
+  type: "paid" | "pending" | "canceled";
 };
 
-export default function TransactionTable({
+export default function PayoutLinkTable({
   showImage,
 }: {
   showImage?: boolean;
 }) {
   return (
     <div className=" p-5 w-full container-border h-full overflow-auto">
-      {purchaseListData.map((item, index) => (
-        <TransactionItem showImage={showImage} key={index} {...item} />
+      {payoutLinkListData.map((item, index) => (
+        <PayoutLinkItem showImage={showImage} key={index} {...item} />
       ))}
     </div>
   );
 }
 
-export interface TransactionItemProps extends TransactionStatusProps {
+export interface PayoutLinkItemProps extends PayoutLinkStatusProps {
   item: string;
-  transactionId: string;
+  payoutId: string;
   price: string;
   date: string;
   showImage?: boolean;
 }
 
-const TransactionItem = ({
+const PayoutLinkItem = ({
   type,
   item,
-  transactionId,
+  payoutId,
   price,
   date,
   showImage,
-}: TransactionItemProps) => {
+}: PayoutLinkItemProps) => {
   return (
     <div className="flex  justify-between items-baseline py-5 border-b">
       <div className="flex items-center gap-3">
         {showImage && (
           <Image
-            src="/eskrow-avatar.png"
+            src="/merchant/payout-icon.svg"
             width={37}
             height={37}
             alt="item image"
@@ -56,8 +56,8 @@ const TransactionItem = ({
         <div className="flex flex-col gap-1">
           <div className="text-primary">{item}</div>
           <div className="flex gap-2 items-center">
-            <div className="text-[11px] text-primary-300">{transactionId}</div>
-            <TransactionStatus type={type} />
+            <div className="text-[11px] text-primary-300">{payoutId}</div>
+            <PayoutLinkStatus type={type} />
           </div>
         </div>
       </div>
@@ -70,12 +70,12 @@ const TransactionItem = ({
   );
 };
 
-const TransactionStatus = ({ type }: TransactionStatusProps) => {
+const PayoutLinkStatus = ({ type }: PayoutLinkStatusProps) => {
   return (
     <div
       className={twMerge(
         "text-[10px] rounded-xl flex items-center justify-center py-1 px-2  text-white",
-        type === "successful"
+        type === "paid"
           ? "bg-green-600"
           : type === "canceled"
           ? "bg-red-600"

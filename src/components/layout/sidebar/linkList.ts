@@ -19,7 +19,7 @@ const verifiedNavLinks: NavLink[] = [
   {
     name: "Overview",
     icon: "overview",
-    url: "/dashboard/merchant",
+    url: "/dashboard/user",
     roles: ["user"],
  
   },
@@ -54,14 +54,14 @@ const verifiedNavLinks: NavLink[] = [
   {
     name: "Overview",
     icon: "overview",
-    url: "/dashboard/user",
+    url: "/dashboard/merchant",
     roles: ["merchant"],
  
   },
   {
     name: "Payment Links",
     icon: "paymentLinks",
-    url: "/dashboard/get-started",
+    url: "/dashboard/merchant/payment-links",
     roles: ["merchant"],
   
   },
@@ -75,7 +75,7 @@ const verifiedNavLinks: NavLink[] = [
   {
     name: "Payouts",
     icon: "payouts",
-    url: "/dashboard/get-started",
+    url: "/dashboard/merchant/payouts",
     roles: ["merchant"],
    
   },
