@@ -1,11 +1,8 @@
 "use client";
-import PaymentCard from "@/components/card/paymentCard";
-import TransactionTable from "@/components/table/transactionTable";
-import { Button } from "@/components/ui/button/button";
-import Image from "next/image";
+import PurchaseTable from "@/components/table/purchasesTable";
+
 import React from "react";
 import { GoArrowRight } from "react-icons/go";
-import { PiCopySimpleDuotone } from "react-icons/pi";
 
 export default function Purchases() {
   return (
@@ -24,7 +21,7 @@ export default function Purchases() {
           </div>
 
           <div className="  h-[500px]">
-            <TransactionTable showImage={true} />
+            <PurchaseTable showImage={true} />
           </div>
         </div>
       </div>

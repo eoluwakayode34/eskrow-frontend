@@ -20,11 +20,10 @@ export default function AuthScreen({
 
       <Image
         src={bg}
-        className="absolute bg-cover left-0 top-0 bottom-0  h-full w-[52%]"
+        className="absolute bg-cover object-cover left-0 top-0 bottom-0  h-full w-[52%]"
         alt="home icon"
         width={1209}
         height={907}
-        objectFit="cover"
       />
 
       <div className="bg-white flex relative h-full p-10 w-1/2 rounded-tl-3xl justify-center items-center  rounded-bl-3xl ">

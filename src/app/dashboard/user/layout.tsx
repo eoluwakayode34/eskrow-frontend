@@ -20,7 +20,7 @@ export default function MerchantLayout({
       />
       <div className="w-full  h-full">
         <DashboardHeader type="user" />
-        <div className="bg-white p-5 min-h-full rounded-tl-[50px] shadow-xl ">
+        <div className="bg-white p-10 h-full rounded-tl-[50px] shadow-xl overflow-auto ">
           {children}
         </div>
       </div>

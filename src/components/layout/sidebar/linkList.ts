@@ -26,28 +26,28 @@ const verifiedNavLinks: NavLink[] = [
   {
     name: "Eskrow",
     icon: "eskrow",
-    url: "/dashboard/get-started",
+    url: "/dashboard/user/eskrow",
     roles: ["user"],
   
   },
   {
     name: "Wallet",
     icon: "wallet",
-    url: "/dashboard/get-started",
+    url: "/dashboard/user/wallet",
     roles: ["user"],
    
   },
   {
     name: "Transactions",
     icon: "transactions",
-    url: "/dashboard/get-started",
+    url: "/dashboard/user/transactions",
     roles: ["user"],
    
   },
   {
     name: "Merchants",
     icon: "merchants",
-    url: "/dashboard/get-started",
+    url: "/dashboard/user/merchants",
     roles: ["user"],
    
   },
