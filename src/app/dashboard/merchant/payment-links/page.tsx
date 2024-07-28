@@ -22,7 +22,7 @@ export default function PaymentLinks() {
 
             <div className="text-sm flex justify-end items-baseline w-6/12 gap-2 text-brand">
               <div className="flex flex-1">
-                <FormInput placeholder="Search link ID or title" name="" />
+                {/* <FormInput placeholder="Search link ID or title" name="" /> */}
               </div>
 
               <Button className="py-[12px] uppercase" size={"medium"}>

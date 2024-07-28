@@ -1,8 +1,13 @@
+"use client";
 import React from "react";
 import AuthScreen from "@/components/screen/auth";
 import WelcomeButton from "@/components/ui/button/welcomeButton";
+import { useRouter } from "next/navigation";
+import { pages } from "@/utils/pages";
 
 export default function Login() {
+  const router = useRouter();
+
   return (
     <AuthScreen>
       <div className="gap-3 flex-col flex">
@@ -11,8 +16,12 @@ export default function Login() {
       </div>
 
       <div className="flex flex-col gap-12 mt-10">
-        <WelcomeButton>User login</WelcomeButton>
-        <WelcomeButton>Merchant login</WelcomeButton>
+        <WelcomeButton onClick={() => router.push(pages.userLogin)}>
+          User login
+        </WelcomeButton>
+        <WelcomeButton onClick={() => router.push(pages.merchantLogin)}>
+          Merchant login
+        </WelcomeButton>
       </div>
     </AuthScreen>
   );

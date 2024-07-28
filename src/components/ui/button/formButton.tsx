@@ -3,7 +3,13 @@ import React from "react";
 import { Button } from "@/components/ui/button/button";
 import { RxArrowRight } from "react-icons/rx";
 
-export default function FormButton({ title }: { title: string }) {
+export default function FormButton({
+  title,
+  isLoading,
+}: {
+  title: string;
+  isLoading?: boolean;
+}) {
   return (
     <Button
       type="submit"
@@ -11,6 +17,7 @@ export default function FormButton({ title }: { title: string }) {
       intent="primary"
       size="big"
       className="mt-6"
+      loading={isLoading}
     >
       {title}
       <RxArrowRight className="w-5" />

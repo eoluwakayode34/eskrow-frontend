@@ -1,15 +1,12 @@
 "use client";
 import React, { ReactNode } from "react";
-
-import Link from "next/link";
-
 import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 
-const textLinkStyles = cva("  text-brand hover:opacity-80 ", {
+const textLinkStyles = cva("text-brand hover:opacity-80", {
   variants: {
     size: {
-      base: "text-base ",
+      base: "text-base",
       small: "text-sm",
     },
   },
@@ -18,10 +15,11 @@ const textLinkStyles = cva("  text-brand hover:opacity-80 ", {
   },
 });
 
-export interface Props extends VariantProps<typeof textLinkStyles> {
+export interface Props
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof textLinkStyles> {
   children: ReactNode;
   className?: string;
-  onClick: () => void;
 }
 
 export default function TextLinkButton({
@@ -29,10 +27,15 @@ export default function TextLinkButton({
   children,
   className,
   onClick,
+  ...otherProps
 }: Props) {
   return (
-    <button onClick={onClick}>
-      <p className={cn(textLinkStyles({ size }), className)}>{children}</p>
+    <button
+      onClick={onClick}
+      className={cn(textLinkStyles({ size }), className)}
+      {...otherProps}
+    >
+      {children}
     </button>
   );
 }

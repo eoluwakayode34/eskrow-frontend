@@ -3,10 +3,7 @@ import React from "react";
 import AuthScreen from "@/components/screen/auth";
 import { Formik, Form } from "formik";
 import FormInput from "@/components/ui/input/textInput";
-import {
-  merchantForgotPasswordnValidationSchema,
-  merchantUserLoginValidationSchema,
-} from "@/utils/validation-schema/merchant/auth";
+import { merchantForgotPasswordnValidationSchema } from "@/utils/validation-schema/merchant/auth";
 import { Button } from "@/components/ui/button/button";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { RxArrowRight } from "react-icons/rx";
@@ -18,6 +15,7 @@ import {
   userForgotPasswordValidationSchema,
   userLoginValidationSchema,
 } from "@/utils/validation-schema/user/auth";
+import { pages } from "@/utils/pages";
 
 export default function ForgotPassword() {
   const onSumbitMerchantLogin = (values: { email: string }) => {
@@ -58,7 +56,7 @@ export default function ForgotPassword() {
                     <p className={cn("text-base text-primary")}>
                       Did not forget your password?
                     </p>
-                    <TextLink href="/password" size={"base"}>
+                    <TextLink href={pages.merchantLogin} size={"base"}>
                       Login
                     </TextLink>
                   </div>

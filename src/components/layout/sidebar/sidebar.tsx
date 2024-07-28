@@ -8,6 +8,8 @@ import { SidebarLink } from "./sidebarLink";
 import { SingleLoader } from "../loading/listLoading";
 import { useUserStore } from "@/store/userStore";
 import { BiLogOutCircle } from "react-icons/bi";
+import { useRouter } from "next/navigation";
+import { pages } from "@/utils/pages";
 
 interface ISidebar {
   showSidebar: boolean;
@@ -23,6 +25,11 @@ const DashboardSidebar = React.memo(function Sidebar({
   type,
 }: ISidebar) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const logOut = () => {
+    router.push(pages.home);
+  };
 
   const user = useUserStore((state) => state.user);
 
@@ -98,7 +105,10 @@ const DashboardSidebar = React.memo(function Sidebar({
           ].map(renderSidebarLink)}
         </ul>
         <div className="p-5 w-full">
-          <button className="flex w-full items-center justify-center gap-1 bg-[#FF3366] text-white px-10 py-3 rounded-md ">
+          <button
+            onClick={logOut}
+            className="flex w-full items-center justify-center gap-1 bg-[#FF3366] text-white px-10 py-3 rounded-md "
+          >
             <div className="text-[19px]">Log Out</div>
             <BiLogOutCircle className="w-6 h-6" />
           </button>

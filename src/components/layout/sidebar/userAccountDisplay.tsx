@@ -2,8 +2,10 @@ import { Popover } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
+import { useRouter } from "next/navigation";
 
 import { SingleLoader } from "../loading/listLoading";
+import { pages } from "@/utils/pages";
 
 export const SidebarUserAccountDisplay = ({
   name,
@@ -14,7 +16,11 @@ export const SidebarUserAccountDisplay = ({
   businessName: string;
   isLoading: boolean;
 }) => {
-  const logOut = () => {};
+  const router = useRouter();
+
+  const logOut = () => {
+    router.push(pages.home);
+  };
 
   const LogoutButton = ({ logOut }: { logOut: () => void }) => (
     <button
