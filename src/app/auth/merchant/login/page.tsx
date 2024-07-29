@@ -3,7 +3,7 @@ import React from "react";
 import AuthScreen from "@/components/screen/auth";
 import { Formik, Form } from "formik";
 import FormInput from "@/components/ui/input/textInput";
-import { merchantUserLoginValidationSchema } from "@/utils/validation-schema/merchant/auth";
+import { merchantLoginValidationSchema } from "@/utils/validation-schema/merchant/auth";
 import { Button } from "@/components/ui/button/button";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { RxArrowRight } from "react-icons/rx";
@@ -11,13 +11,34 @@ import FormButton from "@/components/ui/button/formButton";
 import Link from "next/link";
 import TextLink from "@/components/ui/typography/textLink";
 import { cn } from "@/utils/cn";
+import { useRouter } from "next/navigation";
+import { usePostApi } from "@/hooks/usePostApi";
+import { merchantMutations } from "@/apis/mutations/merchant/signup";
+import {
+  MERCHANT_LOGIN_MUTATIION,
+  MERCHANT_SIGNUP_MUTATIION,
+} from "@/constants/mutationKeys";
+import { pages } from "@/utils/pages";
 
 export default function Login() {
+  const router = useRouter();
+  const mutation = usePostApi({
+    mutationFunction: merchantMutations.login,
+    mutationKey: [MERCHANT_LOGIN_MUTATIION],
+    successMessage: "Login successful",
+    onSuccess(_data, variable) {
+      router.push(pages.merchantDasboard);
+    },
+  });
+
   const onSumbitMerchantLogin = (values: {
     email: string;
     password: string;
   }) => {
-    console.log(values);
+    mutation.mutate({
+      email: values.email,
+      password: values.password,
+    });
   };
 
   return (
@@ -34,7 +55,7 @@ export default function Login() {
               email: "",
               password: "",
             }}
-            validationSchema={merchantUserLoginValidationSchema}
+            validationSchema={merchantLoginValidationSchema}
             onSubmit={onSumbitMerchantLogin}
           >
             {({ errors, touched }) => (
@@ -58,17 +79,17 @@ export default function Login() {
                     placeholder="Password"
                   />
                   <div className="flex justify-end mt-3 flex-1">
-                    <TextLink href="/password" size={"small"}>
+                    <TextLink href={pages.merchantPassword} size={"small"}>
                       Forgot password?
                     </TextLink>
                   </div>
-                  <FormButton title="Log in" />
+                  <FormButton isLoading={mutation.isPending} title="Log in" />
 
                   <div className="flex justify-center mt-3 flex-1 gap-2">
                     <p className={cn("text-base text-primary")}>
                       Don&apos;t have an account?
                     </p>
-                    <TextLink href="/password" size={"base"}>
+                    <TextLink href="/auth/merchant/signup" size={"base"}>
                       Sign up
                     </TextLink>
                   </div>

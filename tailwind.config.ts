@@ -19,7 +19,7 @@ const config: Config = {
           200: '#4ECEF1',
           400: '#136ADE',
 DEFAULT: '#0069FF',
-        },
+      },
         primary: {
           50: '#EEF5FA',
           100: '#E2EFFB',

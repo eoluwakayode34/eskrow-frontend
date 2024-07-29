@@ -3,7 +3,6 @@ import React from "react";
 import AuthScreen from "@/components/screen/auth";
 import { Formik, Form } from "formik";
 import FormInput from "@/components/ui/input/textInput";
-import { merchantUserLoginValidationSchema } from "@/utils/validation-schema/merchant/auth";
 import { Button } from "@/components/ui/button/button";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { RxArrowRight } from "react-icons/rx";

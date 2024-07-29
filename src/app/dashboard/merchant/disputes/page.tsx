@@ -20,7 +20,7 @@ export default function Disputes() {
             </div>
 
             <div className="text-sm flex w-[342px] items-center gap-1 text-brand">
-              <FormInput placeholder="Search dispute ID or title" name="" />
+              {/* <FormInput placeholder="Search dispute ID or title" name="" /> */}
             </div>
           </div>
 

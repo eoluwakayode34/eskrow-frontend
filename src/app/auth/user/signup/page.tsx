@@ -3,22 +3,41 @@ import React from "react";
 import AuthScreen from "@/components/screen/auth";
 import { Formik, Form } from "formik";
 import FormInput from "@/components/ui/input/textInput";
-import { merchantUserLoginValidationSchema } from "@/utils/validation-schema/merchant/auth";
-import { Button } from "@/components/ui/button/button";
-import { IoIosArrowRoundForward } from "react-icons/io";
-import { RxArrowRight } from "react-icons/rx";
 import FormButton from "@/components/ui/button/formButton";
-import Link from "next/link";
 import TextLink from "@/components/ui/typography/textLink";
 import { cn } from "@/utils/cn";
-import { userLoginValidationSchema } from "@/utils/validation-schema/user/auth";
+import { userSignupValidationSchema } from "@/utils/validation-schema/user/auth";
+import { usePostApi } from "@/hooks/usePostApi";
+import { userMutations } from "@/apis/mutations/users/signup";
+import { USER_SIGNUP_MUTATIION } from "@/constants/mutationKeys";
+import { useRouter } from "next/navigation";
+import { pages } from "@/utils/pages";
 
 export default function UserSignup() {
+  const router = useRouter();
+  const mutation = usePostApi({
+    mutationFunction: userMutations.signup,
+    mutationKey: [USER_SIGNUP_MUTATIION],
+    successMessage: "Signup successful",
+    onSuccess(_data, variable) {
+      router.push(pages.userSignupOtpVerify(variable?.phone_number));
+    },
+  });
+
   const onSumbitMerchantLogin = (values: {
+    firstName: string;
+    lastName: string;
+    email: string;
     phoneNumber: string;
     password: string;
   }) => {
-    console.log(values);
+    mutation.mutate({
+      first_name: values.firstName,
+      last_name: values.lastName,
+      email: values.email,
+      password: values.password,
+      phone_number: "+" + values.phoneNumber,
+    });
   };
 
   return (
@@ -38,17 +57,17 @@ export default function UserSignup() {
               phoneNumber: "",
               password: "",
             }}
-            validationSchema={userLoginValidationSchema}
+            validationSchema={userSignupValidationSchema}
             onSubmit={onSumbitMerchantLogin}
           >
-            {({ errors, touched }) => (
+            {({ errors, touched, handleBlur, handleChange }) => (
               <Form>
                 <div className="w-full">
                   <FormInput
                     size="small"
                     name="firstName"
                     error={
-                      errors.firstName && touched.firstName
+                      touched.firstName && errors.firstName
                         ? errors.firstName
                         : null
                     }
@@ -68,12 +87,14 @@ export default function UserSignup() {
                     size="small"
                     name="phoneNumber"
                     type="phoneNumber"
+                    onChange={handleChange("phoneNumber")}
+                    onBlur={handleBlur("phoneNumber")}
                     error={
                       errors.phoneNumber && touched.phoneNumber
                         ? errors.phoneNumber
                         : null
                     }
-                    placeholder="Last name"
+                    placeholder="Phone nu ber"
                   />
                   <FormInput
                     size="small"
@@ -94,7 +115,10 @@ export default function UserSignup() {
                     placeholder="Password"
                   />
 
-                  <FormButton title="Create Account" />
+                  <FormButton
+                    title="Create Account"
+                    isLoading={mutation.isPending}
+                  />
 
                   <div className="flex justify-center mt-3 flex-1 gap-2 ">
                     <p className={cn("text-base text-primary")}>

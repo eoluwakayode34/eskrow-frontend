@@ -3,7 +3,7 @@ import React from "react";
 import AuthScreen from "@/components/screen/auth";
 import { Formik, Form } from "formik";
 import FormInput from "@/components/ui/input/textInput";
-import { merchantUserLoginValidationSchema } from "@/utils/validation-schema/merchant/auth";
+import { merchantSignupValidationSchema } from "@/utils/validation-schema/merchant/auth";
 import { Button } from "@/components/ui/button/button";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { RxArrowRight } from "react-icons/rx";
@@ -12,13 +12,39 @@ import Link from "next/link";
 import TextLink from "@/components/ui/typography/textLink";
 import { cn } from "@/utils/cn";
 import { userLoginValidationSchema } from "@/utils/validation-schema/user/auth";
+import { useRouter } from "next/navigation";
+import { usePostApi } from "@/hooks/usePostApi";
+import { merchantMutations } from "@/apis/mutations/merchant/signup";
+import { MERCHANT_SIGNUP_MUTATIION } from "@/constants/mutationKeys";
+import { pages } from "@/utils/pages";
 
 export default function MerchantSignup() {
+  const router = useRouter();
+  const mutation = usePostApi({
+    mutationFunction: merchantMutations.signup,
+    mutationKey: [MERCHANT_SIGNUP_MUTATIION],
+    successMessage: "Signup successful",
+    onSuccess(_data, variable) {
+      router.push(pages.merchantSignupOtpVerify(variable?.email));
+    },
+  });
+
   const onSumbitMerchantLogin = (values: {
+    firstName: string;
+    lastName: string;
+    businessName: string;
+    email: string;
     phoneNumber: string;
     password: string;
   }) => {
-    console.log(values);
+    mutation.mutate({
+      first_name: values.firstName,
+      last_name: values.lastName,
+      business_name: values.businessName,
+      email: values.email,
+      password: values.password,
+      phone_number: "+" + values.phoneNumber,
+    });
   };
 
   return (
@@ -39,10 +65,10 @@ export default function MerchantSignup() {
               phoneNumber: "",
               password: "",
             }}
-            validationSchema={userLoginValidationSchema}
+            validationSchema={merchantSignupValidationSchema}
             onSubmit={onSumbitMerchantLogin}
           >
-            {({ errors, touched }) => (
+            {({ errors, touched, handleChange, handleBlur }) => (
               <Form>
                 <div className="w-full">
                   <FormInput
@@ -75,16 +101,19 @@ export default function MerchantSignup() {
                     }
                     placeholder="Business name"
                   />
+
                   <FormInput
                     size="small"
                     name="phoneNumber"
                     type="phoneNumber"
+                    onChange={handleChange("phoneNumber")}
+                    onBlur={handleBlur("phoneNumber")}
                     error={
                       errors.phoneNumber && touched.phoneNumber
                         ? errors.phoneNumber
                         : null
                     }
-                    placeholder="Last name"
+                    placeholder="Phone nu ber"
                   />
                   <FormInput
                     size="small"
@@ -105,13 +134,16 @@ export default function MerchantSignup() {
                     placeholder="Password"
                   />
 
-                  <FormButton title="Create Account" />
+                  <FormButton
+                    isLoading={mutation.isPending}
+                    title="Create Account"
+                  />
 
                   <div className="flex justify-center mt-3 flex-1 gap-2 ">
                     <p className={cn("text-base text-primary")}>
                       Already have an Account?
                     </p>
-                    <TextLink href="/password" size={"base"}>
+                    <TextLink href={pages.merchantLogin} size={"base"}>
                       Sign In
                     </TextLink>
                   </div>
@@ -120,15 +152,11 @@ export default function MerchantSignup() {
                       By clicking the “Create account” button, you agree to
                       Eskrow&apos;s
                     </p>{" "}
-                    <TextLink
-                      href="/password"
-                      className="text-small"
-                      size={"small"}
-                    >
+                    <TextLink href="/" className="text-small" size={"small"}>
                       Terms of Use
                     </TextLink>
                     <p className={cn("text-sm text-primary")}>and</p>
-                    <TextLink href="/password" size={"small"}>
+                    <TextLink href="/" size={"small"}>
                       Privacy Policy.
                     </TextLink>
                   </div>

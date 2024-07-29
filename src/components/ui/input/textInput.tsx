@@ -97,7 +97,7 @@ function DefaultInput({
           <div className="absolute -bottom-[3px] left-3">{leftElement}</div>
         )}
 
-        <input
+        <Field
           id={id}
           name={name}
           placeholder={placeholder}
