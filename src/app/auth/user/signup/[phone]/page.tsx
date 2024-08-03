@@ -21,7 +21,7 @@ export default function Page() {
   const { phone } = useParams();
   const router = useRouter();
 
-  const decodedPhonenumber = decodeURIComponent(phone as string);
+  const decodedPhonenumber = String(phone).replace("%2B", "+");
 
   const resendMutation = usePostApi({
     mutationFunction: userMutations.phoneNumberResend,
