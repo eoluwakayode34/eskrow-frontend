@@ -29,15 +29,12 @@ export default function Page() {
     mutationFunction: userMutations.phoneNumberResend,
     mutationKey: [USER_SIGNUP_PHONE_RESEND_MUTATIION],
     successMessage: "Code resent successfully",
-    onSuccess(_data, variable) {
-      // router.push(pages.userSignupOtpVerify(variable?.phone_number));
-    },
   });
   const mutation = usePostApi({
     mutationFunction: userMutations.phoneNumberVerify,
     mutationKey: [USER_SIGNUP_PHONE_VERIFY_MUTATIION],
     successMessage: "Phone number verify successfully",
-    onSuccess(_data, variable) {
+    onSuccess(_data, _variable) {
       router.push(pages.userLogin);
     },
   });
