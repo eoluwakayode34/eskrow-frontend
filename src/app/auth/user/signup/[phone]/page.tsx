@@ -21,7 +21,7 @@ export default function Page() {
   const { phone } = useParams();
   const router = useRouter();
 
-  const decodedPhonenumber = String(phone).replace("%2B", "+");
+  const decodedPhonenumber = String(phone).replace("%2B", "");
 
   const resendMutation = usePostApi({
     mutationFunction: userMutations.phoneNumberResend,
@@ -52,7 +52,7 @@ export default function Page() {
       <div className="gap-3 flex-col flex">
         <h1>Enter OTP</h1>
         <p className="font-light inline-flex gap-1">
-          We sent an OTP to <p className="font-bold">{decodedPhonenumber}</p>
+          We sent an OTP to <p className="font-bold">+{decodedPhonenumber}</p>
         </p>
       </div>
 
