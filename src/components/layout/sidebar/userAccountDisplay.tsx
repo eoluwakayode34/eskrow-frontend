@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { SingleLoader } from "../loading/listLoading";
 import { pages } from "@/utils/pages";
+import { useUserStore } from "@/store/userStore";
 
 export const SidebarUserAccountDisplay = ({
   name,
@@ -17,9 +18,11 @@ export const SidebarUserAccountDisplay = ({
   isLoading: boolean;
 }) => {
   const router = useRouter();
+  const setAuth = useUserStore((state) => state.setAuth);
 
   const logOut = () => {
-    router.push(pages.home);
+    setAuth(null);
+    router.push(pages.userLogin);
   };
 
   const LogoutButton = ({ logOut }: { logOut: () => void }) => (

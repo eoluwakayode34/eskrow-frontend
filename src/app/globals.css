@@ -8,6 +8,9 @@ h1 {
   @apply text-3xl font-bold text-primary;
 }
 
+h2 {
+  @apply text-2xl font-semibold text-primary;
+}
 h3 {
   @apply text-xl font-semibold text-primary;
 }
@@ -17,6 +20,10 @@ p {
  
 }
 
+.text-medium {
+  @apply  text-[0.938rem] text-primary;
+}
+
 .payment-card-heading {
   @apply text-[19px]
 }
@@ -24,5 +31,4 @@ p {
 .container-border{
   @apply border-[1.5px] border-[#E2E8F0] rounded-[10px];
 }
-
 
