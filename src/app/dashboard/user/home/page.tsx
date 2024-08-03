@@ -1,8 +1,10 @@
 "use client";
 import PaymentCard from "@/components/card/paymentCard";
+import { BvnVerificationForm } from "@/components/form/BvnVerification";
 import TransactionTable from "@/components/table/transactionTable";
 import { Button } from "@/components/ui/button/button";
 import CategoryButton from "@/components/ui/button/categoryButton";
+import { SmallModal } from "@/components/ui/modal/smallModal";
 import Image from "next/image";
 import React from "react";
 import { GoArrowRight } from "react-icons/go";
@@ -104,6 +106,7 @@ export default function UserDashboardOverview() {
           </div>
         </div>
       </div>
+
     </div>
   );
 }

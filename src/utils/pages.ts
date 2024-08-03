@@ -4,7 +4,7 @@ export const pages = {
   userPassword: "/auth/user/password",
   merchantPassword: "/auth/merchant/password",
   bookAService: (type: "user" | "non-user") => `/book-a-service/${type}`,
-  userDasboard: "/dashboard/home",
+  userDasboard: "/dashboard/user/home",
   merchantDasboard: "/dashboard/merchant/home",
   userLogin: "/auth/user/login",
   merchantLogin: "/auth/merchant/login",

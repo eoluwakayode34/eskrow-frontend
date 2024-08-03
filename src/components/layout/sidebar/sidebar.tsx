@@ -26,17 +26,19 @@ const DashboardSidebar = React.memo(function Sidebar({
 }: ISidebar) {
   const pathname = usePathname();
   const router = useRouter();
+  const setAuth = useUserStore((state) => state.setAuth);
 
   const logOut = () => {
-    router.push(pages.home);
+    setAuth(null);
+    if (type === "user") {
+      router.push(pages.userLogin);
+    }
+    if (type === "merchant") {
+      router.push(pages.merchantLogin);
+    }
   };
 
-  const user = useUserStore((state) => state.user);
-
-  const linksToDisplay =
-    !user?.hasVirtualAccount || !user?.fundAccountStatus || !user?.payoutStatus
-      ? navLinks
-      : verifiedNavLinks;
+  const linksToDisplay = verifiedNavLinks;
 
   const renderSidebarLink = (link: NavLink, _index: number) => {
     if (link.roles.includes(type)) {

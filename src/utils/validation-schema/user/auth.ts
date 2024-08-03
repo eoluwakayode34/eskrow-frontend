@@ -20,3 +20,11 @@ export const userLoginValidationSchema = yup.object({
 export const userForgotPasswordValidationSchema = yup.object({
     phoneNumber: yup.number().label("Phone number").required("Enter your phone number"),
   });
+
+
+  export const bvnValidationSchema = yup.object({
+    bvn: yup
+    .string()
+    .matches(/^\d{11}$/, "BVN must be exactly 11 digits")
+    .required("BVN is required")
+  });

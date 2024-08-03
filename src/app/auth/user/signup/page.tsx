@@ -94,7 +94,7 @@ export default function UserSignup() {
                         ? errors.phoneNumber
                         : null
                     }
-                    placeholder="Phone nu ber"
+                    placeholder="Phone number"
                   />
                   <FormInput
                     size="small"

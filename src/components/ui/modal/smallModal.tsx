@@ -1,3 +1,4 @@
+import { CloseIcon } from "@/svgs";
 import { Dialog, Transition } from "@headlessui/react";
 
 import React, { Dispatch, Fragment, ReactNode } from "react";
@@ -30,16 +31,22 @@ export const Modal = ({
     >
       <Dialog
         className={
-          " h-screen z-[9999] bg-[rgba(38,38,38,0.80)] p-3  w-full absolute top-0 flex flex-col justify-center"
+          " h-screen z-[9999] bg-[rgba(117,117,117,0.61)] p-3  w-full absolute top-0 flex flex-col justify-center"
         }
         open={isOpen}
         onClose={setIsOpen}
       >
         <Dialog.Panel
-          className={`bg-white   font-sans rounded-lg sm:w-2/3 md:w-2/3 lg:w-1/2 xl:w-2/5 2xl:w-1/3 ml-auto p-3 min-[415px]:p-5  sm:px-4 sm:py-6 md:px-10 md:py-9 overflow-y-auto scrollbar-hide  ${
-            center && "mx-auto "
-          }`}
+          className={`bg-white relative  font-sans rounded-lg sm:w-2/3 md:w-2/3 lg:w-1/2 xl:w-2/5 2xl:w-1/3 ml-auto p-3 min-[415px]:p-5  sm:px-4 sm:py-6 md:px-10 md:py-9 overflow-y-auto scrollbar-hide 
+        outline-8 outline outline-[#ffffff57]
+            ${center && "mx-auto "}`}
         >
+          {showCloseIcon && (
+            <CloseIcon
+              className="absolute right-5 top-5 cursor-pointer p-1 w-6 h-6"
+              onClick={setIsOpen}
+            />
+          )}
           {children}
         </Dialog.Panel>
       </Dialog>
@@ -47,4 +54,4 @@ export const Modal = ({
   );
 };
 
-export const AppModal = React.memo(Modal);
+export const SmallModal = React.memo(Modal);

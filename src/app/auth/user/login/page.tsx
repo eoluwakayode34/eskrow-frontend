@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import AuthScreen from "@/components/screen/auth";
 import { Formik, Form } from "formik";
 import FormInput from "@/components/ui/input/textInput";
@@ -16,18 +16,28 @@ import { usePostApi } from "@/hooks/usePostApi";
 import { userMutations } from "@/apis/mutations/users/signup";
 import { useRouter } from "next/navigation";
 import { pages } from "@/utils/pages";
+import { useUserStore } from "@/store/userStore";
 
 export default function Login() {
   const router = useRouter();
+
+  const setAuth = useUserStore((state) => state.setAuth);
 
   const mutation = usePostApi({
     mutationFunction: userMutations.login,
     mutationKey: [USER_LOGIN_MUTATIION],
     successMessage: "Login successful",
-    onSuccess(_data, variable) {
+    onSuccess(data, variable) {
+      const responseData = data?.data;
+      const accessToken = responseData?.access_token;
+      const user = responseData?.user;
+
+      setAuth({ user, accessToken });
+
       router.push(pages.userDasboard);
     },
   });
+
   const onSumbitMerchantLogin = (values: {
     phoneNumber: string;
     password: string;
