@@ -22,6 +22,7 @@ export default function Page() {
   const router = useRouter();
 
   const decodedPhonenumber = String(phone).replace("%2B", "");
+  decodedPhonenumber.replace("%20", "");
 
   const resendMutation = usePostApi({
     mutationFunction: userMutations.phoneNumberResend,
@@ -42,7 +43,7 @@ export default function Page() {
 
   const onSumbitMerchantLogin = (values: { otp: string }) => {
     mutation.mutate({
-      phone_number: decodedPhonenumber,
+      phone_number: "+" + decodedPhonenumber,
       code: values.otp,
     });
   };
