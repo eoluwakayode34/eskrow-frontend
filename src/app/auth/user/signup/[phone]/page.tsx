@@ -77,7 +77,7 @@ export default function Page() {
                     <TextLinkButton
                       onClick={() =>
                         resendMutation.mutate({
-                          phone_number: decodedPhonenumber,
+                          phone_number: "+" + decodedPhonenumber,
                         })
                       }
                       size={"small"}
