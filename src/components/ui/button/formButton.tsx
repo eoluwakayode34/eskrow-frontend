@@ -6,9 +6,11 @@ import { RxArrowRight } from "react-icons/rx";
 export default function FormButton({
   title,
   isLoading,
+  arrow = true,
 }: {
   title: string;
   isLoading?: boolean;
+  arrow?: boolean;
 }) {
   return (
     <Button
@@ -20,7 +22,7 @@ export default function FormButton({
       loading={isLoading}
     >
       {title}
-      <RxArrowRight className="w-5" />
+      {arrow && <RxArrowRight className="w-5" />}{" "}
     </Button>
   );
 }
