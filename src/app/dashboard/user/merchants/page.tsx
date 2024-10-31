@@ -19,7 +19,7 @@ export default function UserMerchants() {
             </div>
           </div>
 
-          <div className="w-full h-full px-6 py-7 container-border ">
+          {/* <div className="w-full h-full px-6 py-7 container-border ">
             <div className="grid grid-cols-4 gap-5">
               <div className="col-span-1">
                 <CategoryButton
@@ -57,7 +57,7 @@ export default function UserMerchants() {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

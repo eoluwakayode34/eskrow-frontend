@@ -1,0 +1,1 @@
+export const GET_WALLET_QUERY = 'GET_WALLET_QUERY'

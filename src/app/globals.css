@@ -20,6 +20,10 @@ p {
  
 }
 
+.text-18 {
+@apply text-lg text-primary;
+}
+
 .text-medium {
   @apply  text-[0.938rem] text-primary;
 }
