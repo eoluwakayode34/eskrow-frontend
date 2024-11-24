@@ -2,6 +2,7 @@
 import { BvnVerificationForm } from "@/components/form/BvnVerification";
 import DashboardHeader from "@/components/layout/header";
 import DashboardSidebar from "@/components/layout/sidebar/sidebar";
+import { useUserStore } from "@/store/userStore";
 import React from "react";
 
 export default function UsersLayout({
@@ -9,7 +10,7 @@ export default function UsersLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
+  const auth = useUserStore((state) => state.auth);
 
   return (
     <div className="flex bg-[#F4F7FA] h-screen overflow-clip">
@@ -28,8 +29,7 @@ export default function UsersLayout({
         </div>
       </div>
 
-      <BvnVerificationForm />
-
+      {!auth?.user?.bvn_verified && <BvnVerificationForm />}
     </div>
   );
 }

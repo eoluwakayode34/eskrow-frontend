@@ -25,7 +25,6 @@ export const merchantMutations = {
   async login(formData: {
     email: string,
     password: string
-  
   }
   ) {
     const response = await requestInstance.post("/auth/merchants/login", formData);
