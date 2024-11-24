@@ -4,6 +4,7 @@ import TransactionTable from "@/components/table/transactionTable";
 import { Button } from "@/components/ui/button/button";
 import Image from "next/image";
 import React from "react";
+import { BiPlus } from "react-icons/bi";
 import { GoArrowRight } from "react-icons/go";
 import { PiCopySimpleDuotone } from "react-icons/pi";
 
@@ -11,7 +12,10 @@ export default function Merchant() {
   return (
     <div className="w-full pb-20">
       <div className="flex flex-1 justify-end py-5">
-        <Button size={"medium"}>MAKE PAYMENT</Button>
+        <Button size={"medium"}>
+          {" "}
+           MAKE PAYMENT
+        </Button>
       </div>
       <div className="flex gap-[18px]">
         <PaymentCard name="Monthly Purchase" value="250" />

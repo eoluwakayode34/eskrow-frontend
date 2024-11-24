@@ -19,7 +19,7 @@ export default function UserDashboardOverview() {
             </div>
           </div>
 
-          <div className="">
+          {/* <div className="">
             <div className="w-full h-full p-6 container-border ">
               <div className="grid grid-cols-4 gap-5">
                 <div className="col-span-1">
@@ -59,7 +59,7 @@ export default function UserDashboardOverview() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex flex-1 gap-8 mt-12 items-end">

@@ -1,4 +1,5 @@
 import { CloseIcon } from "@/svgs";
+import { cn } from "@/utils/cn";
 import { Dialog, Transition } from "@headlessui/react";
 
 import React, { Dispatch, Fragment, ReactNode } from "react";
@@ -17,6 +18,7 @@ export const Modal = ({
   children,
   center = true,
   showCloseIcon = true,
+  title,
 }: IAppModal) => {
   return (
     <Transition
@@ -41,11 +43,28 @@ export const Modal = ({
         outline-8 outline outline-[#ffffff57]
             ${center && "mx-auto "}`}
         >
-          {showCloseIcon && (
+          {showCloseIcon && !title && (
             <CloseIcon
               className="absolute right-5 top-5 cursor-pointer p-1 w-6 h-6"
               onClick={setIsOpen}
             />
+          )}
+
+          {title && (
+            <div className="flex pb-2 border-b border-[#E2E8F0] justify-between">
+              <p
+                className={cn("text-sm text-primary text-center font-semibold")}
+              >
+                {title}
+              </p>
+
+              {showCloseIcon && (
+                <CloseIcon
+                  className=" cursor-pointer p-1 w-5 h-5"
+                  onClick={setIsOpen}
+                />
+              )}
+            </div>
           )}
           {children}
         </Dialog.Panel>

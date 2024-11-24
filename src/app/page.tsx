@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import AuthScreen from "@/components/screen/auth";
 import WelcomeButton from "@/components/ui/button/welcomeButton";
 import { useRouter } from "next/navigation";
 import { pages } from "@/utils/pages";
+import axios from "axios";
 
 export default function Login() {
   const router = useRouter();

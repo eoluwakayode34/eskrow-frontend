@@ -42,9 +42,10 @@ export function usePostApi({
       }
     },
     onError(error, _variables, _context) {
-      console.log(error)
       showToast({
-        message: (error.response.data as unknown as { message: string })?.message || "Something went wrong",
+        message:
+          (error.response.data as unknown as { message: string })?.message ||
+          "Something went wrong",
         type: "error",
       });
     },

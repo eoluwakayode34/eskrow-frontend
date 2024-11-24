@@ -3,21 +3,31 @@ import React from "react";
 import AuthScreen from "@/components/screen/auth";
 import { Formik, Form } from "formik";
 import FormInput from "@/components/ui/input/textInput";
-import { Button } from "@/components/ui/button/button";
-import { IoIosArrowRoundForward } from "react-icons/io";
-import { RxArrowRight } from "react-icons/rx";
+
 import FormButton from "@/components/ui/button/formButton";
-import Link from "next/link";
 import TextLink from "@/components/ui/typography/textLink";
 import { cn } from "@/utils/cn";
-import {
-  userForgotPasswordValidationSchema,
-  userLoginValidationSchema,
-} from "@/utils/validation-schema/user/auth";
+import { userForgotPasswordValidationSchema } from "@/utils/validation-schema/user/auth";
+import { useRouter } from "next/navigation";
+import { usePostApi } from "@/hooks/usePostApi";
+import { userMutations } from "@/apis/mutations/users/signup";
+import { PASSWORD_RESET_MUTATION } from "@/constants/mutationKeys";
+import { pages } from "@/utils/pages";
 
 export default function ForgotPassword() {
+  const router = useRouter();
+
+  const mutation = usePostApi({
+    mutationFunction: userMutations.forgotPassword,
+    mutationKey: [PASSWORD_RESET_MUTATION],
+    onSuccess(_data, variable) {
+      router.push(pages.userForgotpassword(variable?.phone_number));
+    },
+  });
   const onSumbitMerchantLogin = (values: { phoneNumber: string }) => {
-    console.log(values);
+    mutation.mutate({
+      phone_number: "+" + values.phoneNumber,
+    });
   };
 
   return (
@@ -38,28 +48,30 @@ export default function ForgotPassword() {
             validationSchema={userForgotPasswordValidationSchema}
             onSubmit={onSumbitMerchantLogin}
           >
-            {({ errors, touched }) => (
+            {({ errors, touched, handleChange, handleBlur }) => (
               <Form>
                 <div className="w-full">
                   <FormInput
                     size="small"
                     name="phoneNumber"
                     type="phoneNumber"
+                    onChange={handleChange("phoneNumber")}
+                    onBlur={handleBlur("phoneNumber")}
                     error={
                       errors.phoneNumber && touched.phoneNumber
                         ? errors.phoneNumber
                         : null
                     }
-                    placeholder="Phone"
+                    placeholder="Phone number"
                   />
 
-                  <FormButton title="Continue" />
+                  <FormButton isLoading={mutation.isPending} title="Continue" />
 
                   <div className="flex justify-center mt-3 flex-1 gap-2">
                     <p className={cn("text-base text-primary")}>
                       Did not forget your password?
                     </p>
-                    <TextLink href="/password" size={"base"}>
+                    <TextLink href={pages.userLogin} size={"base"}>
                       Login
                     </TextLink>
                   </div>

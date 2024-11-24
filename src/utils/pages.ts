@@ -11,23 +11,36 @@ export const pages = {
   userSignup: "/auth/user/signup",
   proSignup: "/auth/pro/signup",
   proSignupSuccessful: "/auth/pro/signup/successful",
-  userSignupOtpVerify: (phoneNumber: string) => `/auth/user/signup/${phoneNumber}`,
-  userSignupDetails: (sessionId: string) => `/auth/user/signup/${sessionId}/user-details`,
-  userSignupLocation: (sessionId: string) => `/auth/user/signup/${sessionId}/user-details/location`,
-  userSignupVerifyPhone: (sessionId: string) => `/auth/user/signup/${sessionId}/user-details/verify-phone`,
-  userSignupConnection: (sessionId: string) => `/auth/user/signup/${sessionId}/user-details/connections`,
+  userSignupOtpVerify: (phoneNumber: string) =>
+    `/auth/user/signup/${phoneNumber}`,
+  userForgotpassword: (phoneNumber: string) =>
+    `/auth/user/password/${phoneNumber}`,
+  userSignupDetails: (sessionId: string) =>
+    `/auth/user/signup/${sessionId}/user-details`,
+  userSignupLocation: (sessionId: string) =>
+    `/auth/user/signup/${sessionId}/user-details/location`,
+  userSignupVerifyPhone: (sessionId: string) =>
+    `/auth/user/signup/${sessionId}/user-details/verify-phone`,
+  userSignupConnection: (sessionId: string) =>
+    `/auth/user/signup/${sessionId}/user-details/connections`,
   userSignupMoreDetails: (sessionId: string, isConnect: boolean) =>
     `/auth/user/signup/${sessionId}/user-details/more-details/${isConnect}`,
-  userSignupBookAservice: (sessionId: string) => `/auth/user/signup/${sessionId}/user-details/book-a-service`,
+  userSignupBookAservice: (sessionId: string) =>
+    `/auth/user/signup/${sessionId}/user-details/book-a-service`,
 
   // MERCHANT USER
   merchantSignupOtpVerify: (email: string) => `/auth/merchant/signup/${email}`,
 
-  proSignupProfile: (sessionId: string) => `/auth/pro/signup/${sessionId}/pro-details`,
-  proSignupServiceDetails: (sessionId: string) => `/auth/pro/signup/${sessionId}/pro-details/service-details`,
-  proSignupConnection: (sessionId: string) => `/auth/pro/signup/${sessionId}/pro-details/connections`,
+  proSignupProfile: (sessionId: string) =>
+    `/auth/pro/signup/${sessionId}/pro-details`,
+  proSignupServiceDetails: (sessionId: string) =>
+    `/auth/pro/signup/${sessionId}/pro-details/service-details`,
+  proSignupConnection: (sessionId: string) =>
+    `/auth/pro/signup/${sessionId}/pro-details/connections`,
   proSignupMoreDetails: (sessionId: string, isConnect: boolean) =>
     `/auth/pro/signup/${sessionId}/pro-details/more-details/${isConnect}`,
-  proSignupHireApprentice: (sessionId: string) => `/auth/pro/signup/${sessionId}/pro-details/hire-apprentice`,
-  proSignupAdditionalInfo: (sessionId: string) => `/auth/pro/signup/${sessionId}/pro-details/additional-info`,
+  proSignupHireApprentice: (sessionId: string) =>
+    `/auth/pro/signup/${sessionId}/pro-details/hire-apprentice`,
+  proSignupAdditionalInfo: (sessionId: string) =>
+    `/auth/pro/signup/${sessionId}/pro-details/additional-info`,
 };
