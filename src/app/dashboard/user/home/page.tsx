@@ -27,12 +27,26 @@ const useWalletData = () => {
     },
   });
 };
+const useCategoriesData = () => {
+  const axiosPrivate = useAxiosPrivate("users");
+
+  return useQuery({
+    queryKey: ["GET_CATEGORIES_QUERY"],
+    queryFn: async () => {
+      const response = await axiosPrivate.get("/merchants/categories");
+      return response.data;
+    },
+  });
+};
 
 export default function UserDashboardOverview() {
   const { data, isLoading, isError, error } = useWalletData();
+  const { data: categoriesData, isLoading: categoriesIsLoading } =
+    useCategoriesData();
   const [isFundWallet, setIsFundWallet] = useState(false);
   const [isOpenMerchantList, setIsOpenMerchantList] = useState(false);
   const [selectedMerchant, setSelectedMerchant] = useState<string>("");
+
 
   return (
     <div className="w-full pb-20">
@@ -79,29 +93,25 @@ export default function UserDashboardOverview() {
           <div className="">
             <div className="w-full h-full p-6 container-border ">
               <div className="grid grid-cols-4 gap-5">
-                <div className="col-span-1">
-                  <CategoryButton
-                    onClick={() => {
-                      setIsOpenMerchantList(true);
-                      setSelectedMerchant("FASHION MERCHANTS");
-                    }}
-                    imageAlt={`/merchant/categories/fashion.png`}
-                    imageSrc="/merchant/categories/fashion.png"
-                    text="Fashion"
-                  />
-                </div>
-                <div className="col-span-1">
-                  <CategoryButton
-                    imageAlt={`/merchant/categories/fashion.png`}
-                    imageSrc="/merchant/categories/fashion.png"
-                    text="Fashion"
-                    onClick={() => {
-                      setIsOpenMerchantList(true);
-                      setSelectedMerchant("FASHION MERCHANTS");
-                    }}
-                  />
-                </div>
-                <div className="col-span-1">
+                {categoriesData?.data?.map(
+                  (item: { slug: string; name: string }, key: any) => (
+                    <div className="col-span-1" key={key}>
+                      <CategoryButton
+                        onClick={() => {
+                          setIsOpenMerchantList(true);
+                          setSelectedMerchant(
+                            `${item?.name?.toUpperCase()} MERCHANTS`
+                          );
+                        }}
+                        imageAlt={`${item.slug}`}
+                        imageSrc={item.slug}
+                        text={item.name}
+                      />
+                    </div>
+                  )
+                )}
+
+                {/* <div className="col-span-1">
                   <CategoryButton
                     imageAlt={`/merchant/categories/fashion.png`}
                     imageSrc="/merchant/categories/fashion.png"
@@ -134,6 +144,17 @@ export default function UserDashboardOverview() {
                     }}
                   />
                 </div>
+                <div className="col-span-1">
+                  <CategoryButton
+                    imageAlt={`/merchant/categories/fashion.png`}
+                    imageSrc="/merchant/categories/fashion.png"
+                    text="Fashion"
+                    onClick={() => {
+                      setIsOpenMerchantList(true);
+                      setSelectedMerchant("FASHION MERCHANTS");
+                    }}
+                  />
+                </div> */}
               </div>
             </div>
           </div>

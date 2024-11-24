@@ -124,7 +124,7 @@ export default function UserSignup() {
                     <p className={cn("text-base text-primary")}>
                       Already have an Account?
                     </p>
-                    <TextLink href="/password" size={"base"}>
+                    <TextLink href={pages.userLogin} size={"base"}>
                       Sign In
                     </TextLink>
                   </div>
