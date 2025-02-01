@@ -47,7 +47,6 @@ export default function UserDashboardOverview() {
   const [isOpenMerchantList, setIsOpenMerchantList] = useState(false);
   const [selectedMerchant, setSelectedMerchant] = useState<string>("");
 
-
   return (
     <div className="w-full pb-20">
       <div className="flex flex-1 justify-end py-5">
@@ -61,19 +60,31 @@ export default function UserDashboardOverview() {
       <div className="flex gap-[18px]">
         <PaymentCard
           name="Total Balance"
-          value={`₦${data?.data?.balance ?? "..."}`}
+          value={`₦${
+            data?.data?.balance
+              ? Number(data?.data?.balance).toLocaleString()
+              : "..."
+          }`}
         />
         <PaymentCard
           intent={"secondary"}
           name="Eskrow Balance"
-          value={`₦${data?.data?.balance ?? "..."}`}
+          value={`₦${
+            data?.data?.balance
+              ? Number(data?.data?.balance).toLocaleString()
+              : "..."
+          }`}
           bg="/eskrow-card.png"
         />
         <PaymentCard
           bg="/balance-payment-card.png"
           intent={"secondary"}
           name="Wallet Balance"
-          value={`₦${data?.data?.balance ?? "..."}`}
+          value={`₦${
+            data?.data?.balance
+              ? Number(data?.data?.balance).toLocaleString()
+              : "..."
+          }`}
         />
       </div>
 
