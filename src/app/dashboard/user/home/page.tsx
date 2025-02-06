@@ -1,17 +1,13 @@
 "use client";
-import { useGetWallet } from "@/apis/mutations/users/useAuth";
 import PaymentCard from "@/components/card/paymentCard";
-import { BvnVerificationForm } from "@/components/form/BvnVerification";
 import { FundWalletForm } from "@/components/form/FundAccountWallet";
 import { MerchantSearchListModal } from "@/components/modals/merchantSearchListModal";
 import TransactionTable from "@/components/table/transactionTable";
 import { Button } from "@/components/ui/button/button";
 import CategoryButton from "@/components/ui/button/categoryButton";
-import { SmallModal } from "@/components/ui/modal/smallModal";
-import { GET_WALLET_QUERY } from "@/constants/queryKeys";
+
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 import React, { useState } from "react";
 import { BiPlusCircle } from "react-icons/bi";
 import { GoArrowRight } from "react-icons/go";
