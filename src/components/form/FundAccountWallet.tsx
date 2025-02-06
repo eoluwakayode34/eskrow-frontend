@@ -3,6 +3,7 @@ import { SmallModal } from "../ui/modal/smallModal";
 import { userMutations } from "@/apis/mutations/users/signup";
 import {
   USER_BVN_VERIFY_MUTATION,
+  USER_FUND_ACCOUNT_MUTATION,
   USER_LOGIN_MUTATIION,
 } from "@/constants/mutationKeys";
 import { Form, Formik } from "formik";
@@ -34,19 +35,29 @@ export const FundWalletForm = ({
     const response = await axiosPrivate.post("/users/verify-bvn", formData);
     return response.data;
   };
+  const userFundAcount = async (formData: { amount: number }) => {
+    const response = await axiosPrivate.post("/transactions/topup", formData);
+    return response.data;
+  };
   const mutation = usePostApi({
     mutationFunction: userBvnVerify,
     mutationKey: [USER_BVN_VERIFY_MUTATION],
     // successMessage: "BVN Verifi successful",
-    onSuccess(_data, _variable) {
- 
+    onSuccess(_data, _variable) {},
+  });
+  const mutationFundAccount = usePostApi({
+    mutationFunction: userFundAcount,
+    mutationKey: [USER_FUND_ACCOUNT_MUTATION],
+    // successMessage: "BVN Verifi successful",
+    onSuccess(data, _variable) {
+      window.open(data?.data?.authorization_url, "_blank");
     },
   });
 
   const onSumbitMerchantLogin = (values: { amount: number | null }) => {
-    // mutation.mutate({
-    //   bvn: values.bvn,
-    // });
+    mutationFundAccount.mutate({
+      amount: Number(values.amount),
+    });
   };
 
   return (
@@ -90,17 +101,10 @@ export const FundWalletForm = ({
                       }
                       placeholder="Amount"
                     />
-
-                    {/* <div className="flex gap-2 items-center mt-2">
-                      <CheckMarkRoundIcon className="w-5 h-5" />
-                      <p className="text-medium text-secondary">
-                        Malik Owolabi
-                      </p>
-                    </div> */}
                   </div>
 
                   <FormButton
-                    isLoading={mutation.isPending}
+                    isLoading={mutationFundAccount.isPending}
                     arrow={false}
                     title="Continue"
                   />
